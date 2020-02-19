@@ -88,6 +88,7 @@ class Profile extends React.Component<{}, {}> {
     next_shift: 0,
     phone_number: '',
     isFetching: true,
+    nullProfile: false,
     phone: false
   }
 
@@ -103,7 +104,12 @@ class Profile extends React.Component<{}, {}> {
     fetch('https://hackthenorth.netlify.com/api/fe-challenge-attendee').then((results: any) => {
       return results.json();
     }).then((myJson: EndpointResponse) => {
-      this.setState(myJson);
+      if (myJson) {
+        this.setState({ nullProfile: false })
+        this.setState(myJson);
+      } else {
+        this.setState({ nullProfile: true })
+      }
       this.setState({ isFetching: false });
     });
   }
@@ -133,8 +139,13 @@ class Profile extends React.Component<{}, {}> {
       return <>Fetching...</>;
     }
     // No profile found
-    if (!this.state.type) {
-      return <div>ERROR: no profile found. Please try again</div>;
+    if (this.state.nullProfile) {
+      return (
+        <>
+          <Button onClick={this.loadProfile}>Load New Profile</Button>
+          <div>ERROR: no profile found. Please try again</div>
+        </>
+      );
     }
 
     const { id, name, profile_pic, bio, type, checked_in, actions, num_workshops_attended, sponsor_company, sponsor_company_link, next_shift, phone_number } = this.state;
