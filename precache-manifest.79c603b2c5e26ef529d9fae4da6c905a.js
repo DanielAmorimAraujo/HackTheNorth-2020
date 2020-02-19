@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "24f5747ab59f59ef7f484e27339cb219",
+    "revision": "d916844fae64007daf29562380665108",
     "url": "/HackTheNorth-2020/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/HackTheNorth-2020/static/js/2.727c195a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6cdc26f9cf106837a1cd",
-    "url": "/HackTheNorth-2020/static/js/main.a31b803c.chunk.js"
+    "revision": "a4e2db847e03e1c8498d",
+    "url": "/HackTheNorth-2020/static/js/main.3a959497.chunk.js"
   },
   {
     "revision": "a1634f108d717507209b",
