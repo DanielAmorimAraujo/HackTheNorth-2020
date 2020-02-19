@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Login from 'sections/Login';
 import Profile from 'sections/Profile';
+import Button from 'components/Button';
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -21,7 +22,14 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      {!loggedIn ? <Login setLoggedIn={setLoggedIn} /> : <Profile setLoggedIn={setLoggedIn} />}
+      {!loggedIn && <Login setLoggedIn={setLoggedIn} />}
+      {loggedIn && (
+        <>
+          <Button onClick={() => { setLoggedIn(false) }}>Logout</Button>
+          <Profile />
+        </>
+      )
+      }
     </>
   );
 }

@@ -30,7 +30,6 @@ const Login = ({ setLoggedIn }: { setLoggedIn: React.Dispatch<React.SetStateActi
   const validPassword = 'passwordHTN';
 
   const validateLogin = () => {
-    setLoggedIn(true);
     if (email === validEmail && password === validPassword) {
       setLoggedIn(true);
     } else {

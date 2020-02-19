@@ -73,7 +73,7 @@ const capitalizeAction = (act: string) => {
 }
 
 // Profile for any given attendee (determined by type)
-class Profile extends React.Component<{ setLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }, {}> {
+class Profile extends React.Component<{}, {}> {
   state = {
     id: 0,
     name: '',
@@ -91,8 +91,15 @@ class Profile extends React.Component<{ setLoggedIn: React.Dispatch<React.SetSta
     phone: false
   }
 
-  // fetch from the user API, updating state once received
   componentDidMount() {
+    this.loadProfile();
+  }
+
+  // fetch from the user API, updating state once received
+  loadProfile = () => {
+    if (!this.state.isFetching) {
+      this.setState({ isFetching: true })
+    }
     fetch('https://hackthenorth.netlify.com/api/fe-challenge-attendee').then((results: any) => {
       return results.json();
     }).then((myJson: EndpointResponse) => {
@@ -127,12 +134,7 @@ class Profile extends React.Component<{ setLoggedIn: React.Dispatch<React.SetSta
     }
     // No profile found
     if (!this.state.type) {
-      return (
-        <>
-          <Button onClick={() => { this.props.setLoggedIn(false) }}>Logout</Button>
-          <div>ERROR: no profile found. Please try again</div>
-        </>
-      );
+      return <div>ERROR: no profile found. Please try again</div>;
     }
 
     const { id, name, profile_pic, bio, type, checked_in, actions, num_workshops_attended, sponsor_company, sponsor_company_link, next_shift, phone_number } = this.state;
@@ -142,11 +144,11 @@ class Profile extends React.Component<{ setLoggedIn: React.Dispatch<React.SetSta
       check_in: this.checkIn,
       attend_workshop: this.increaseWorkshop,
       call_phone: this.showPhone
-    }
+    };
 
     return (
       <>
-        <Button onClick={() => { this.props.setLoggedIn(false) }}>Logout</Button>
+        <Button onClick={this.loadProfile}>Load New Profile</Button>
         <ProfileWrapper>
           <ProfileImage src={profile_pic} type={type} />
           <Name>{name}</Name>
@@ -164,7 +166,7 @@ class Profile extends React.Component<{ setLoggedIn: React.Dispatch<React.SetSta
           {type === 'volunteer' && (
             <ProfileSection>
               Next Shift:
-              <div>
+             <div>
                 {date.toString()}
               </div>
             </ProfileSection>
