@@ -36,7 +36,7 @@ An endpoint for attendee information is available at `https://hackthenorth.netli
 // have a look at the sample data by visiting the endpoint above.
 
 // Each attendee will belong to one of the following groups
-type AttendeeType = "hacker" | "organizer" | "volunteer | "sponsor";
+type AttendeeType = "hacker" | "organizer" | "volunteer" | "sponsor";
 
 // Actions that can be applied to a profile
 // Note: some actions will only appear on profiles of certain types! (ex. call_phone for an "organizer")
